@@ -1,0 +1,15 @@
+{
+  "name": "section-01",
+  "version": "1.0.0",
+  "description": "The first week of Backend Development 2",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "author": "Tyler Peart",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
