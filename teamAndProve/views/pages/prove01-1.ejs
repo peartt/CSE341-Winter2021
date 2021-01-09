@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% include ../includes/header.ejs %>
+</head>
+
+<body>
+  <% include ../includes/nav.ejs %>
+<div class="jumbotron text-center">
+  <div class="container">
+    <h1><%= title %></h1>
+    <p>This is Prove Activity 01 </p>
+    <p>For this activity, please enter your name and age in the form below </p>
+  </div>
+</div>
+<form style="text-align: center;" action="/prove01" method="POST">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name"><br><br>
+    <label for="age">Age:</label>
+    <input type="text" id="age" name="age"><br><br>
+    <input type="submit" value="submit">
+</form>
+
+</body>
+</html>

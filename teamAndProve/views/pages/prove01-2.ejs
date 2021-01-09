@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<!-- <%= path %> -->
+<html>
+<head>
+  <% include ../includes/header.ejs %>
+</head>
+
+<body>
+  <% include ../includes/nav.ejs %>
+<div class="jumbotron text-center">
+  <div class="container">
+    <h1><%= title %></h1>
+    <p>This is Prove Activity 02 </p>
+    <p>For this activity, please enter your name and age in the form below </p>
+  </div>
+</div>
+<!-- Informing the user of their input -->
+<span>Your inputted name is: </span><%= name %><br>
+<span>Your inputted age is: </span> <%= age %><br>
+
+</body>
+</html>
