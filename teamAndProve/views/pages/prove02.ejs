@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <% include ../includes/header.ejs %>
+</head>
+<body>
+  <% include ../includes/nav.ejs %>
+<div class="jumbotron text-center">
+  <div class="container">
+    <h1><%= title %></h1>
+  </div>
+</div>
+
+<p>Have a great book you want to share? Enter the name and a quick description!</p>
+<form action="/prove02/addBook" method="POST">
+    <input type="text" name="title" placeholder="title"><br>
+    <input type="text" name="author" placeholder="author (optional)"><br>
+    <textarea name="summary" placeholder="Write a breif summary here" rows="4" cols="50"></textarea><br>
+    <button type="submit">Submit</button>
+</form>
+</body>
+</html>
