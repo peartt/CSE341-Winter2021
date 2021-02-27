@@ -23,6 +23,7 @@ const ta01Routes = require('./routes/ta01');
 const ta02Routes = require('./routes/ta02');
 const ta03Routes = require('./routes/ta03'); 
 const ta04Routes = require('./routes/ta04'); 
+const ta05Routes = require('./routes/ta05'); 
 //temp, for navigating to prove01
 const prove01Routes = require('./routes/prove01');
 const prove02Routes = require('./routes/prove02');
@@ -40,6 +41,7 @@ app.use(express.static(path.join(__dirname, 'public')))
    .use('/ta02', ta02Routes) 
    .use('/ta03', ta03Routes) 
    .use('/ta04', ta04Routes)
+   .use('/ta05', ta05Routes)
    //temp, for prove01. Currently breaks program when uncommented. Not sure why.
    .use('/prove01', prove01Routes)
    .use('/prove02', prove02Routes)
