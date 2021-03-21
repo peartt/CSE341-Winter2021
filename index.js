@@ -30,7 +30,7 @@ const prove01Routes = require('./routes/prove01');
 const prove02Routes = require('./routes/prove02');
 const prove09Routes = require('./routes/prove09');
 
-app.use(express.static(path.join(__dirname, 'public')))
+   app.use(express.static(path.join(__dirname, 'public')))
    .set('views', path.join(__dirname, 'views'))
    .set('view engine', 'ejs')
    // For view engine as Pug
@@ -56,5 +56,35 @@ app.use(express.static(path.join(__dirname, 'public')))
    .use((req, res, next) => {
      // 404 page
      res.render('pages/404', {title: '404 - Page Not Found', path: req.url})
-   })
-   .listen(PORT, () => console.log(`Listening on ${ PORT }`));
+   });
+   const server = app.listen(PORT, () => console.log(`Listening on ${ PORT }`));
+
+  // Initialize socket.io
+  // Make sure you `npm install socket.io socket.io-client`
+  const io = require('socket.io')(server)
+
+  // Listen for new connections
+  io.on('connection', socket => {
+      console.log('Client connected!')
+      socket.on('disconnect', () => {
+          console.log('Client disconnected!')
+      })
+          // 3 methods for sending data to clients:
+    // io.emit(event, data)
+    //      Send to all connected clients
+    // socket.emit(event, data)
+    //      Send ONLY to the client that sent to us
+    // socket.broadcast.emit(event, data)
+    //      Send to all clients EXCEPT the client that sent to us
+
+    // Do some validation in these functions.
+    // Prevent duplicates, and make sure we can actually add/remove
+    // the name that was sent.
+    // If something is wrong, use socket.emit to send an error
+    // to the client that sent the name.
+
+    // Listen for add events
+    socket.on('addNameW11', name => {
+        io.emit('updateNames', true)
+    })
+  })

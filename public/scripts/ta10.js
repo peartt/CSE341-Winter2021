@@ -1,8 +1,15 @@
-const { response } = require("express");
+// const { response } = require("express");
+const socket = io('/');
+
+socket.on('updateNames', () => {
+    display();
+})
 
 function display() {
     var names = [];
-    fetch("https://cs341-winter2021.herokuapp.com/ta10/fetchAll") //TODO change to Heroku before deploying
+    fetch(
+        "https://cs341-winter2021.herokuapp.com/ta10/fetchAll")
+        // "http://localhost:5000/ta10/fetchAll")
     .then(response => response.json())
     .then((out) => {
         // console.log(data)
@@ -26,6 +33,7 @@ function add() {
         //call the insert POST route with newName
         fetch(
             "https://cs341-winter2021.herokuapp.com/ta10/insert",
+            // "http://localhost:5000/ta10/insert",
             {
                 method: 'POST',
                 headers: {
@@ -37,6 +45,8 @@ function add() {
         .then(response => response.json())
         .then((out) => {
             //call display to reflect the updated list
+            // socket.broadcast.emit('addNameW11')
+            socket.emit('addNameW11', true)
             display();
         });
     }
