@@ -29,6 +29,7 @@ const ta10Routes = require('./routes/ta10');
 const prove01Routes = require('./routes/prove01');
 const prove02Routes = require('./routes/prove02');
 const prove09Routes = require('./routes/prove09');
+const prove12Routes = require('./routes/liveChat');
 
    app.use(express.static(path.join(__dirname, 'public')))
    .set('views', path.join(__dirname, 'views'))
@@ -49,6 +50,7 @@ const prove09Routes = require('./routes/prove09');
    .use('/prove01', prove01Routes)
    .use('/prove02', prove02Routes)
    .use('/prove09', prove09Routes)
+   .use('/liveChat', prove12Routes)
    .get('/', (req, res, next) => {
      // This is the primary index, always handled last. 
      res.render('pages/index', {title: 'Welcome to my CSE341 repo', path: '/'});
@@ -84,7 +86,27 @@ const prove09Routes = require('./routes/prove09');
     // to the client that sent the name.
 
     // Listen for add events
-    socket.on('addNameW11', name => {
+    socket
+    .on('addNameW11', name => {
         io.emit('updateNames', true)
     })
+    .on('newUser', (username) => {
+            // A new user logs in.
+            const message = `${username} has logged on.`
+            socket.broadcast.emit('newMessage', {
+                /** CONTENT for the emit **/
+                // <-----TODO-----
+                message: message, 
+                user: "admin",
+            }) 
+        })
+        .on('message', data => {
+            // Receive a new message
+            console.log('Message received')
+            console.log(data)
+            socket.broadcast.emit('newMessage', {
+                /** CONTENT for the emit **/
+                ...data
+            }) // <-----TODO----- Note, only emits to all OTHER clients, not sender.
+        })
   })
